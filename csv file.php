@@ -5,24 +5,24 @@ $message = '';
 
 if(isset($_POST["upload"]))
 {
- if($_FILES['product_file']['name'])
+ if($_FILES['passenger detail_file']['name'])
  {
-  $filename = explode(".", $_FILES['product_file']['name']);
+  $filename = explode(".", $_FILES['passenger detail_file']['name']);
   if(end($filename) == "csv")
   {
-   $handle = fopen($_FILES['product_file']['tmp_name'], "r");
+   $handle = fopen($_FILES['passenger detail_file']['tmp_name'], "r");
    while($data = fgetcsv($handle))
    {
-    $product_id = mysqli_real_escape_string($connect, $data[0]);
-    $product_category = mysqli_real_escape_string($connect, $data[1]);  
-                $product_name = mysqli_real_escape_string($connect, $data[2]);
-    $product_price = mysqli_real_escape_string($connect, $data[3]);
+    $passenger detail_id = mysqli_real_escape_string($connect, $data[0]);
+    $passenger detail_category = mysqli_real_escape_string($connect, $data[1]);  
+                $passenger detail_name = mysqli_real_escape_string($connect, $data[2]);
+    $passenger detail_price = mysqli_real_escape_string($connect, $data[3]);
     $query = "
-     UPDATE daily_product 
-     SET product_category = '$product_category', 
-     product_name = '$product_name', 
-     product_price = '$product_price' 
-     WHERE product_id = '$product_id'
+     UPDATE daily_passenger detail 
+     SET passenger detail_category = '$passenger detail_category', 
+     passenger detail_name = '$passenger detail_name', 
+     passenger detail_price = '$passenger detail_price' 
+     WHERE passenger detail_id = '$passenger detail_id'
     ";
     mysqli_query($connect, $query);
    }
@@ -42,10 +42,10 @@ if(isset($_POST["upload"]))
 
 if(isset($_GET["updation"]))
 {
- $message = '<label class="text-success">Product Updation Done</label>';
+ $message = '<label class="text-success">passenger detail Updation Done</label>';
 }
 
-$query = "SELECT * FROM daily_product";
+$query = "SELECT * FROM daily_passenger detail";
 $result = mysqli_query($connect, $query);
 ?> <!DOCTYPE html>
 <html>
@@ -62,7 +62,7 @@ $result = mysqli_query($connect, $query);
    <br />
    <form method="post" enctype='multipart/form-data'>
     <p><label>Please Select File(Only CSV Formate)</label>
-    <input type="file" name="product_file" /></p>
+    <input type="file" name="passenger detail_file" /></p>
     <br />
     <input type="submit" name="upload" class="btn btn-info" value="Upload" />
    </form>
@@ -74,17 +74,17 @@ $result = mysqli_query($connect, $query);
     <table class="table table-bordered table-striped">
      <tr>
       <th>Category</th>
-      <th>Product Name</th>
-      <th>Product Price</th>
+      <th>passenger detail Name</th>
+      <th>passenger detail Price</th>
      </tr>
      <?php
      while($row = mysqli_fetch_array($result))
      {
       echo '
       <tr>
-       <td>'.$row["product_category"].'</td>
-       <td>'.$row["product_name"].'</td>
-       <td>'.$row["product_price"].'</td>
+       <td>'.$row["passenger detail_category"].'</td>
+       <td>'.$row["passenger detail_name"].'</td>
+       <td>'.$row["passenger detail_price"].'</td>
       </tr>
       ';
      }
